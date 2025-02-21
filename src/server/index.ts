@@ -30,8 +30,12 @@ async function init(): Promise<void> {
   app.use(bodyParser());
   app.use(session({}, app));
 
+  // 静的ファイルに対してキャッシュを有効にするためのミドルウェア
   app.use(async (ctx, next) => {
-    ctx.set('Cache-Control', 'no-store');
+    // 静的リソースへのアクセスの場合のみキャッシュヘッダーを設定
+    if (ctx.path.startsWith('/dist') || ctx.path.startsWith('/public')) {
+      ctx.set('Cache-Control', 'public, max-age=31536000');
+    }
     await next();
   });
 
