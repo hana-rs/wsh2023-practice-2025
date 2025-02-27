@@ -19,7 +19,8 @@ export const MediaItem: FC<Props> = ({ file }) => {
 
   useEffect(() => {
     if (mediaType === 'image') {
-      return setImageSrc(file.filename);
+      const filenameWebP = file.filename.replace(/\.(jpg|jpeg|png)$/, '.webp');
+      return setImageSrc(filenameWebP);
     }
     loadThumbnail(file.filename).then((url) => setImageSrc(url));
   }, [file.filename, mediaType]);

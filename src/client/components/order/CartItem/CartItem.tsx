@@ -30,6 +30,8 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
     onUpdate(item.product.id, count);
   };
 
+  const thumbnailFilenameWebP = thumbnailFile?.filename.replace(/\.(jpg|jpeg|png)$/, '.webp');
+
   return (
     <GetDeviceType>
       {({ deviceType }) => {
@@ -51,7 +53,7 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
                       })}
                     >
                       <AspectRatio ratioHeight={9} ratioWidth={16}>
-                        <Image fill src={thumbnailFile.filename} />
+                        <Image fill src={thumbnailFilenameWebP} />
                       </AspectRatio>
                       {activeOffer !== undefined && (
                         <div className={styles.offerLabel()}>
